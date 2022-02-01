@@ -5,5 +5,6 @@ public enum UserField {
     LAST_NAME,
     EMAIL,
     ROLE,
-    PHONE_NUMBER
+    PHONE_NUMBER,
+    NOT_EDIT
 }

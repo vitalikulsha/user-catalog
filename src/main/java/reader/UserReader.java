@@ -52,9 +52,9 @@ public class UserReader implements Reader {
 
     @Override
     public void stop() {
-        System.out.println("Application shutdown.");
         try {
             reader.close();
+            System.out.println("Application shutdown.");
         } catch (IOException e) {
             System.out.println("An error occurred while stopping the application: " + e.getMessage());
         }
@@ -65,21 +65,25 @@ public class UserReader implements Reader {
         return reader;
     }
 
-    private String enterFirstName() throws IOException {
+    @Override
+    public String enterFirstName() throws IOException {
         System.out.print("Enter the user's first name: ");
         return reader.readLine();
     }
 
-    private String enterLastName() throws IOException {
+    @Override
+    public String enterLastName() throws IOException {
         System.out.print("Enter the user's last name: ");
         return reader.readLine();
     }
 
+    @Override
     public String enterEmail() throws IOException {
         return emailValidator.getValue(reader, null);
     }
 
-    private List<Role> enterRoles() throws IOException {
+    @Override
+    public List<Role> enterRoles() throws IOException {
         System.out.println(Arrays.toString(Role.values()));
         List<Role> roles = new ArrayList<>();
         String flag = "Y";
@@ -99,7 +103,8 @@ public class UserReader implements Reader {
         return roles;
     }
 
-    private List<Long> enterPhoneNumbers() throws IOException {
+    @Override
+    public List<Long> enterPhoneNumbers() throws IOException {
         List<Long> phoneNumbers = new ArrayList<>();
         String flag = "Y";
         while (flag.equalsIgnoreCase("Y")) {

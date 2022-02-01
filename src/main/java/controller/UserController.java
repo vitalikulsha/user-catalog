@@ -58,8 +58,9 @@ public class UserController implements Controller {
     }
 
     @Override
-    public void editUser(int id, UserField field) {
-
+    public void editUser(int id) {
+        User user = service.edit(id);
+        System.out.println("Edited user: " + user);
     }
 
     @Override

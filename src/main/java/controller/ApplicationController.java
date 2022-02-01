@@ -20,7 +20,7 @@ public class ApplicationController {
             case SHOW_USER -> controller.printUserById(ApplicationReader.getInt(reader));
             case CREATE -> controller.addUser();
             case UPDATE -> controller.updateUser(ApplicationReader.getInt(reader));
-//            case EDIT -> controller.editUser(ApplicationReader.getInt(reader), userReader.createUser());
+            case EDIT -> controller.editUser(ApplicationReader.getInt(reader));
             case DELETE -> controller.deleteUser(ApplicationReader.getInt(reader));
             case STOP -> {
                 controller.stopReader();

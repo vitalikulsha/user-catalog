@@ -1,7 +1,5 @@
 package controller;
 
-import reader.UserField;
-
 import java.io.BufferedReader;
 
 public interface Controller {
@@ -13,7 +11,7 @@ public interface Controller {
 
     void updateUser(int id);
 
-    void editUser(int id, UserField field);
+    void editUser(int id);
 
     void deleteUser(int id);
 

@@ -1,10 +1,12 @@
 package reader;
 
+import domain.Role;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class ApplicationReader<Enum> {
+public class ApplicationReader {
 
     public static int getInt(BufferedReader reader) {
         while (true) {
@@ -33,7 +35,7 @@ public class ApplicationReader<Enum> {
     }
 
     public static Command getCommand(BufferedReader reader) {
-        Arrays.stream(Command.values()).forEach(System.out::println);
+        System.out.println(Arrays.toString(Command.values()));
         while (true) {
             System.out.print("Select a command from the list: ");
             String command = null;
@@ -60,9 +62,9 @@ public class ApplicationReader<Enum> {
     }
 
     public static UserField getUserField(BufferedReader reader) {
-        Arrays.stream(UserField.values()).forEach(System.out::println);
+        System.out.println(Arrays.toString(UserField.values()));
         while (true) {
-            System.out.print("Select a user field from the list: ");
+            System.out.print("Select the user field to edit from the list: ");
             String userField = null;
             try {
                 userField = reader.readLine().toUpperCase();
