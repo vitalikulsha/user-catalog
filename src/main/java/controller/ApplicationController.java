@@ -14,7 +14,7 @@ public class ApplicationController {
 
     public void start() {
         BufferedReader reader = controller.getReader();
-        Command command = ApplicationReader.getCommand(reader);
+        Command command = ApplicationReader.getEnum(reader, Command.class);
         switch (command) {
             case SHOW_ALL -> controller.printAllUsers();
             case SHOW_USER -> controller.printUserById(ApplicationReader.getInt(reader));
@@ -26,6 +26,7 @@ public class ApplicationController {
                 controller.stopReader();
                 return;
             }
+            default -> System.out.println("Command entry exception");
         }
         start();
     }

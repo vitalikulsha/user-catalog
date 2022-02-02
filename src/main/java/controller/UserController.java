@@ -1,7 +1,6 @@
 package controller;
 
 import domain.User;
-import reader.UserField;
 import service.Service;
 
 
@@ -28,7 +27,7 @@ public class UserController implements Controller {
     }
 
     @Override
-    public void printUserById(int id) {
+    public void printUserById(Integer id) {
         User user = service.getUserById(id);
         if (user != null) {
             System.out.println(user);
@@ -48,7 +47,7 @@ public class UserController implements Controller {
     }
 
     @Override
-    public void updateUser(int id) {
+    public void updateUser(Integer id) {
         User user = service.update(id);
         if (user != null) {
             System.out.println("Updated user: " + user);
@@ -58,13 +57,17 @@ public class UserController implements Controller {
     }
 
     @Override
-    public void editUser(int id) {
+    public void editUser(Integer id) {
         User user = service.edit(id);
-        System.out.println("Edited user: " + user);
+        if (user != null) {
+            System.out.println("Edited user: " + user);
+        } else {
+            System.out.println("User with this id was not found");
+        }
     }
 
     @Override
-    public void deleteUser(int id) {
+    public void deleteUser(Integer id) {
         if (service.delete(id)) {
             System.out.println("User id=" + id + " deleted successfully");
         } else {

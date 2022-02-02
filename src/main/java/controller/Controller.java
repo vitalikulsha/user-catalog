@@ -5,15 +5,15 @@ import java.io.BufferedReader;
 public interface Controller {
     void printAllUsers();
 
-    void printUserById(int id);
+    void printUserById(Integer id);
 
     void addUser();
 
-    void updateUser(int id);
+    void updateUser(Integer id);
 
-    void editUser(int id);
+    void editUser(Integer id);
 
-    void deleteUser(int id);
+    void deleteUser(Integer id);
 
     void stopReader();
 

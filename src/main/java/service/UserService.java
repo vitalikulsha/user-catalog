@@ -1,6 +1,5 @@
 package service;
 
-import domain.Role;
 import domain.User;
 import reader.ApplicationReader;
 import reader.Reader;
@@ -9,6 +8,7 @@ import reader.UserField;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class UserService implements Service {
     private int count;
@@ -36,7 +36,7 @@ public class UserService implements Service {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(Integer id) {
         if (users.isEmpty()) {
             return null;
         }
@@ -58,11 +58,17 @@ public class UserService implements Service {
         return user;
     }
 
+    //сделать как метод delete
     @Override
-    public User update(int id) {
-        User userById = getUserById(id);
+    public User update(Integer id) {
+        if (users.isEmpty()) {
+            return null;
+        }
+        User currentUser = getUserById(id);
+        id = getId(currentUser);
+        System.out.println("id=" + id + ": " + currentUser);
         User user = userReader.createUser();
-        if (userById != null) {
+        if (currentUser != null) {
             users.put(id, user);
             return user;
         } else {
@@ -70,11 +76,16 @@ public class UserService implements Service {
         }
     }
 
+    //сделать как метод delete
     @Override
-    public User edit(int id) {
+    public User edit(Integer id) {
+        if (users.isEmpty()) {
+            return null;
+        }
         User user = getUserById(id);
-        System.out.println(user);
-        UserField userField = ApplicationReader.getUserField(reader);
+        id = getId(user);
+        System.out.println("id=" + id + ": " + user);
+        UserField userField = ApplicationReader.getEnum(reader, UserField.class);
         try {
             switch (userField) {
                 case FIRST_NAME -> user.setFirstName(userReader.enterFirstName());
@@ -82,22 +93,23 @@ public class UserService implements Service {
                 case EMAIL -> user.setEmail(userReader.enterEmail());
                 case ROLE -> user.setRoles(userReader.enterRoles());
                 case PHONE_NUMBER -> user.setPhoneNumbers(userReader.enterPhoneNumbers());
-                case NOT_EDIT -> {
+                case EXIT -> {
                     users.put(id, user);
                     return user;
                 }
+                default -> System.out.println("Command entry exception");
             }
         } catch (IOException e) {
             System.out.println("An error occurred while editing the user:" + e.getMessage());
             return null;
         }
-        edit(id);//здесь ошибка в ID, он не меняется если неправильно введен
+        edit(id);
         users.put(id, user);
         return user;
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         if (getUserById(id) == null) {
             return false;
         } else {
@@ -109,5 +121,14 @@ public class UserService implements Service {
     @Override
     public Reader getUserReader() {
         return userReader;
+    }
+
+    private Integer getId(User user) {
+        for (Map.Entry<Integer, User> entry : users.entrySet()) {
+            if (user.equals(entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 }
