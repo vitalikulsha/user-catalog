@@ -36,7 +36,7 @@ public class UserReader implements Reader {
     }
 
     @Override
-    public User createUser() {
+    public User enterUser() {
         try {
             String firstName = enterFirstName();
             String lastName = enterLastName();
@@ -48,21 +48,6 @@ public class UserReader implements Reader {
             System.out.println("An error occurred while creating the user:" + e.getMessage());
             return null;
         }
-    }
-
-    @Override
-    public void stop() {
-        try {
-            reader.close();
-            System.out.println("Application shutdown.");
-        } catch (IOException e) {
-            System.out.println("An error occurred while stopping the application: " + e.getMessage());
-        }
-    }
-
-    @Override
-    public BufferedReader getReader() {
-        return reader;
     }
 
     @Override
@@ -89,7 +74,7 @@ public class UserReader implements Reader {
         String flag = "Y";
         while (flag.equalsIgnoreCase("Y")) {
             Role role = roleValidator.getValue(reader, roles.size() + 1);
-            if (roleValidator.verifyAndRepeat(roles, role)) {
+            if (roleValidator.verifyAndContinue(roles, role)) {
                 if (roleValidator.verifyAndBreak(roles, role)) {
                     roles.add(role);
                 } else {
@@ -109,7 +94,7 @@ public class UserReader implements Reader {
         String flag = "Y";
         while (flag.equalsIgnoreCase("Y")) {
             Long phoneNumber = phoneNumberValidator.getValue(reader, (phoneNumbers.size() + 1));
-            if (phoneNumberValidator.verifyAndRepeat(phoneNumbers, phoneNumber)) {
+            if (phoneNumberValidator.verifyAndContinue(phoneNumbers, phoneNumber)) {
                 phoneNumbers.add(phoneNumber);
             } else {
                 continue;
@@ -117,5 +102,20 @@ public class UserReader implements Reader {
             flag = phoneNumberValidator.getFlag(reader, phoneNumbers);
         }
         return phoneNumbers;
+    }
+
+    @Override
+    public void stop() {
+        try {
+            reader.close();
+            System.out.println("Application shutdown.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while stopping the application: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public BufferedReader getReader() {
+        return reader;
     }
 }

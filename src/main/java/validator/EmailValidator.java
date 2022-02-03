@@ -23,7 +23,7 @@ public class EmailValidator implements Validator<String> {
     }
 
     @Override
-    public String getFlag(BufferedReader reader, List<String> objects) throws IOException {
+    public String getFlag(BufferedReader reader, List<String> objects){
         return null;
     }
 
@@ -33,7 +33,7 @@ public class EmailValidator implements Validator<String> {
     }
 
     @Override
-    public boolean verifyAndRepeat(List<String> objects, String object) {
+    public boolean verifyAndContinue(List<String> objects, String object) {
         return false;
     }
 }

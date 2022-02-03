@@ -22,8 +22,8 @@ public class Application {
         HashMap<Integer, User> users = new UsersContainer().getUsers();
 
         Reader userReader = new UserReader(new RoleValidator(), new PhoneNumberValidator(), new EmailValidator(), reader);
-//        Service userService = new UserService(users, userReader, reader);
-        Service userService = new UserService(userReader, reader);
+        Service userService = new UserService(users, userReader, reader);
+//        Service userService = new UserService(userReader, reader);
         Controller userController = new UserController(userService);
 
         ApplicationController applicationController = new ApplicationController(userController);

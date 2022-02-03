@@ -17,11 +17,11 @@ public class ApplicationController {
         Command command = ApplicationReader.getEnum(reader, Command.class);
         switch (command) {
             case SHOW_ALL -> controller.printAllUsers();
-            case SHOW_USER -> controller.printUserById(ApplicationReader.getInt(reader));
+            case SHOW_USER -> controller.printUserById(ApplicationReader.getInteger(reader));
             case CREATE -> controller.addUser();
-            case UPDATE -> controller.updateUser(ApplicationReader.getInt(reader));
-            case EDIT -> controller.editUser(ApplicationReader.getInt(reader));
-            case DELETE -> controller.deleteUser(ApplicationReader.getInt(reader));
+            case UPDATE -> controller.updateUser(ApplicationReader.getInteger(reader));
+            case EDIT -> controller.editUser(ApplicationReader.getInteger(reader));
+            case DELETE -> controller.deleteUser(ApplicationReader.getInteger(reader));
             case STOP -> {
                 controller.stopReader();
                 return;

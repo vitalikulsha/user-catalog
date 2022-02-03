@@ -12,7 +12,7 @@ public class UsersContainer {
     private HashMap<Integer, User> users = new HashMap<>() {{
         put(1, new User("Ivan", "Ivanov", "ivan@gmail.com",
                 Stream.of(Role.USER, Role.ADMIN).collect(Collectors.toCollection(ArrayList::new)),
-                Stream.of(375L, 380L).collect(Collectors.toCollection(ArrayList::new))));
+                Stream.of(375123456789L).collect(Collectors.toCollection(ArrayList::new))));
         put(2, new User("Petr", "Petrov", "petr@gmail.com",
                 Stream.of(Role.CUSTOMER, Role.PROVIDER).collect(Collectors.toCollection(ArrayList::new)),
                 Stream.of(242L, 302L).collect(Collectors.toCollection(ArrayList::new))));

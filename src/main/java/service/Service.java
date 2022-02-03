@@ -16,7 +16,7 @@ public interface Service {
 
     User edit(Integer id);
 
-    boolean delete(Integer id);
+    User delete(Integer id);
 
     Reader getUserReader();
 }

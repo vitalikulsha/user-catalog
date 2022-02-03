@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class ApplicationReader {
 
-    public static Integer getInt(BufferedReader reader) {
+    public static Integer getInteger(BufferedReader reader) {
         while (true) {
             System.out.print("Enter user id: ");
             String id = null;
@@ -33,7 +33,7 @@ public class ApplicationReader {
             } catch (IOException ex) {
                 return null;
             }
-            T command = getEnum(stringCommand, c);
+            T command = getEnumFromString(stringCommand, c);
             if (command != null) {
                 return command;
             } else {
@@ -43,17 +43,25 @@ public class ApplicationReader {
     }
 
     private static boolean isInteger(String id) {
-        try {
-            Integer.parseInt(id);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+        if (id != null) {
+            try {
+                Integer.parseInt(id);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
         }
+        return false;
     }
 
-    private static <T extends Enum<T>> T getEnum(String command, Class<T> c) {
+    private static <T extends Enum<T>> T getEnumFromString(String command, Class<T> c) {
         if (c != null && command != null) {
-            return Enum.valueOf(c, command);
+            Enum<T>[] enums = c.getEnumConstants();
+            for (Enum<T> item : enums) {
+                if (item.name().equals(command)) {
+                    return Enum.valueOf(c, command);
+                }
+            }
         }
         return null;
     }

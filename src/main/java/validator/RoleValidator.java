@@ -48,7 +48,7 @@ public class RoleValidator implements Validator<Role> {
     }
 
     @Override
-    public boolean verifyAndRepeat(List<Role> roles, Role role) {
+    public boolean verifyAndContinue(List<Role> roles, Role role) {
         if (roles.contains(role)) {
             System.out.println("The user already has the " + role.name() + " role selected.");
             return false;

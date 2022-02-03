@@ -11,5 +11,5 @@ public interface Validator<O> {
 
     boolean verifyAndBreak(List<O> objects, O object);
 
-    boolean verifyAndRepeat(List<O> objects, O object);
+    boolean verifyAndContinue(List<O> objects, O object);
 }

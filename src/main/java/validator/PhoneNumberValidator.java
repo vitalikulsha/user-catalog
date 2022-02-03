@@ -41,7 +41,7 @@ public class PhoneNumberValidator implements Validator<Long> {
     }
 
     @Override
-    public boolean verifyAndRepeat(List<Long> phoneNumbers, Long phoneNumber) {
+    public boolean verifyAndContinue(List<Long> phoneNumbers, Long phoneNumber) {
         if (phoneNumbers.contains(phoneNumber)) {
             System.out.println("The user already has the " + phoneNumber + " phone number selected.");
             return false;

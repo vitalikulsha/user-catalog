@@ -8,11 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface Reader {
-    User createUser();
-
-    void stop();
-
-    BufferedReader getReader();
+    User enterUser();
 
     String enterFirstName() throws IOException;
 
@@ -23,4 +19,8 @@ public interface Reader {
     List<Role> enterRoles() throws IOException;
 
     List<Long> enterPhoneNumbers() throws IOException;
+
+    void stop();
+
+    BufferedReader getReader();
 }

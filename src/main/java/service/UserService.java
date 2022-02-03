@@ -4,11 +4,11 @@ import domain.User;
 import reader.ApplicationReader;
 import reader.Reader;
 import reader.UserField;
+import util.Answer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 public class UserService implements Service {
     private int count;
@@ -37,53 +37,37 @@ public class UserService implements Service {
 
     @Override
     public User getUserById(Integer id) {
-        if (users.isEmpty()) {
-            return null;
-        }
-        User user = users.get(id);
-        while (user == null) {
-            System.out.println("User id=" + id + " not found, please try again");
-            user = users.get(ApplicationReader.getInt(reader));
-        }
-        return user;
+        return users.get(id);
     }
 
     @Override
     public User add() {
-        User user = userReader.createUser();
-        if (users.containsValue(user)) {
-            return null;
-        }
+        User user = userReader.enterUser();
+        if (users.containsValue(user)) return null;
         users.put(++count, user);
         return user;
     }
 
-    //сделать как метод delete
     @Override
     public User update(Integer id) {
-        if (users.isEmpty()) {
-            return null;
-        }
         User currentUser = getUserById(id);
-        id = getId(currentUser);
+        if (currentUser == null) return null;
         System.out.println("id=" + id + ": " + currentUser);
-        User user = userReader.createUser();
-        if (currentUser != null) {
-            users.put(id, user);
-            return user;
-        } else {
-            return null;
+        while (true) {
+            User newUser = userReader.enterUser();
+            if (users.containsValue(newUser)) {
+                System.out.println(Answer.EXISTS + " Try again.");
+            } else {
+                users.put(id, newUser);
+                return newUser;
+            }
         }
     }
 
-    //сделать как метод delete
     @Override
     public User edit(Integer id) {
-        if (users.isEmpty()) {
-            return null;
-        }
         User user = getUserById(id);
-        id = getId(user);
+        if (user == null) return null;
         System.out.println("id=" + id + ": " + user);
         UserField userField = ApplicationReader.getEnum(reader, UserField.class);
         try {
@@ -109,26 +93,12 @@ public class UserService implements Service {
     }
 
     @Override
-    public boolean delete(Integer id) {
-        if (getUserById(id) == null) {
-            return false;
-        } else {
-            users.remove(id);
-            return true;
-        }
+    public User delete(Integer id) {
+        return users.remove(id);
     }
 
     @Override
     public Reader getUserReader() {
         return userReader;
-    }
-
-    private Integer getId(User user) {
-        for (Map.Entry<Integer, User> entry : users.entrySet()) {
-            if (user.equals(entry.getValue())) {
-                return entry.getKey();
-            }
-        }
-        return null;
     }
 }
