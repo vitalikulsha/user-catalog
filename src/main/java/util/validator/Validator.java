@@ -1,4 +1,4 @@
-package validator;
+package util.validator;
 
 import java.io.BufferedReader;
 import java.io.IOException;

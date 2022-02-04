@@ -1,4 +1,6 @@
-package validator;
+package util.validator;
+
+import util.Property;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,15 +8,15 @@ import java.util.List;
 
 public class EmailValidator implements Validator<String> {
 
-    private final static String FORMAT = "****@***.***";
-    private final static String PATTERN = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+    private final static String EMAIL_PATTERN = "emailPattern.regexp";
 
     @Override
     public String getValue(BufferedReader reader, Integer index) throws IOException {
+        String emailPattern = Property.getValue(EMAIL_PATTERN);
         while (true) {
-            System.out.print("Enter the user's email in the format " + FORMAT + ": ");
+            System.out.print("Enter the user's email in the format ****@***.***: ");
             String email = reader.readLine();
-            if (email.matches(PATTERN)) {
+            if (email.matches(emailPattern)) {
                 return email;
             } else {
                 System.out.println("Incorrect email: " + email);
@@ -23,7 +25,7 @@ public class EmailValidator implements Validator<String> {
     }
 
     @Override
-    public String getFlag(BufferedReader reader, List<String> objects){
+    public String getFlag(BufferedReader reader, List<String> objects) {
         return null;
     }
 

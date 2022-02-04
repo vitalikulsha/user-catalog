@@ -1,4 +1,4 @@
-package reader;
+package util.reader;
 
 import java.io.BufferedReader;
 import java.io.IOException;

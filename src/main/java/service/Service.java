@@ -1,7 +1,7 @@
 package service;
 
 import domain.User;
-import reader.Reader;
+import util.reader.Reader;
 
 import java.util.HashMap;
 
@@ -17,6 +17,8 @@ public interface Service {
     User edit(Integer id);
 
     User delete(Integer id);
+
+    Integer getId(User user);
 
     Reader getUserReader();
 }

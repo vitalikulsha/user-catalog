@@ -1,11 +1,11 @@
-package reader;
+package util.reader;
 
 import domain.Role;
 import domain.User;
-import validator.EmailValidator;
-import validator.PhoneNumberValidator;
-import validator.RoleValidator;
-import validator.Validator;
+import util.validator.EmailValidator;
+import util.validator.PhoneNumberValidator;
+import util.validator.RoleValidator;
+import util.validator.Validator;
 
 import java.io.BufferedReader;
 import java.io.IOException;

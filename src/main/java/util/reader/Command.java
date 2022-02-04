@@ -1,4 +1,4 @@
-package reader;
+package util.reader;
 
 public enum Command {
     SHOW_USER,

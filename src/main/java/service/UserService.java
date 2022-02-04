@@ -1,14 +1,15 @@
 package service;
 
 import domain.User;
-import reader.ApplicationReader;
-import reader.Reader;
-import reader.UserField;
+import util.reader.ApplicationReader;
+import util.reader.Reader;
+import util.reader.UserField;
 import util.Answer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class UserService implements Service {
     private int count;
@@ -76,7 +77,7 @@ public class UserService implements Service {
                 case LAST_NAME -> user.setLastName(userReader.enterLastName());
                 case EMAIL -> user.setEmail(userReader.enterEmail());
                 case ROLE -> user.setRoles(userReader.enterRoles());
-                case PHONE_NUMBER -> user.setPhoneNumbers(userReader.enterPhoneNumbers());
+                case PHONE -> user.setPhoneNumbers(userReader.enterPhoneNumbers());
                 case EXIT -> {
                     users.put(id, user);
                     return user;
@@ -95,6 +96,16 @@ public class UserService implements Service {
     @Override
     public User delete(Integer id) {
         return users.remove(id);
+    }
+
+    @Override
+    public Integer getId(User user) {
+        for (Map.Entry<Integer, User> entry : users.entrySet()) {
+            if (entry.getValue().equals(user)) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
     @Override

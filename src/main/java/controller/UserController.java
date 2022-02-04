@@ -3,6 +3,7 @@ package controller;
 import domain.User;
 import service.Service;
 import util.Answer;
+import util.UserWorker;
 
 import java.io.BufferedReader;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class UserController implements Controller {
         if (isEmptyUsers()) return;
         User user = service.getUserById(id);
         if (user != null) {
-            System.out.println("id= " + id + ": " + user);
+            System.out.println("id=" + id + ": " + user);
         } else {
             System.out.println(Answer.NOT_FOUND);
         }
@@ -41,7 +42,9 @@ public class UserController implements Controller {
     public void addUser() {
         User user = service.add();
         if (user != null) {
-            System.out.println("Created user: " + user);
+            Integer id = service.getId(user);
+            System.out.println("Created user: id=" + id + ": " + user);
+            UserWorker.writeUserToFile(id, user);
         } else {
             System.out.println(Answer.EXISTS);
         }
@@ -53,6 +56,7 @@ public class UserController implements Controller {
         User user = service.update(id);
         if (user != null) {
             System.out.println("Updated user: " + user);
+            UserWorker.writeUserToFile(id, user);
         } else {
             System.out.println(Answer.NOT_FOUND);
         }
@@ -64,6 +68,7 @@ public class UserController implements Controller {
         User user = service.edit(id);
         if (user != null) {
             System.out.println("Edited user: " + user);
+            UserWorker.writeUserToFile(id, user);
         } else {
             System.out.println(Answer.NOT_FOUND);
         }
@@ -75,6 +80,7 @@ public class UserController implements Controller {
         User user = service.delete(id);
         if (user != null) {
             System.out.println("Deleted user: " + user);
+            UserWorker.deleteUserFile(id);
         } else {
             System.out.println(Answer.NOT_FOUND);
         }

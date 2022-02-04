@@ -1,7 +1,7 @@
 package controller;
 
-import reader.ApplicationReader;
-import reader.Command;
+import util.reader.ApplicationReader;
+import util.reader.Command;
 
 import java.io.BufferedReader;
 

@@ -1,4 +1,6 @@
-package validator;
+package util.validator;
+
+import util.Property;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,17 +8,19 @@ import java.util.List;
 
 public class PhoneNumberValidator implements Validator<Long> {
 
-    private final static String FORMAT = "375*****";
-    private final static String PATTERN = "375\\d{9}";
-    private final static int MAX_AMOUNT = 3;
+    private final static String FORMAT = "phoneFormat";
+    private final static String PATTERN = "phonePattern.regexp";
+    private final static String MAX_AMOUNT = "phoneMaxAmount";
 
     @Override
     public Long getValue(BufferedReader reader, Integer index) throws IOException {
+        String format = Property.getValue(FORMAT);
+        String pattern = Property.getValue(PATTERN);
         while (true) {
             System.out.print("The user can have from 1 to 3 phones. Enter #" + index +
-                    " user phone number in the format " + FORMAT + ": ");
+                    " user phone number in the format " + format + ": ");
             String phoneNumber = reader.readLine();
-            if (phoneNumber.matches(PATTERN)) {
+            if (phoneNumber.matches(pattern)) {
                 return Long.parseLong(phoneNumber);
             } else {
                 System.out.println("Incorrect phone number: " + phoneNumber);
@@ -26,7 +30,8 @@ public class PhoneNumberValidator implements Validator<Long> {
 
     @Override
     public String getFlag(BufferedReader reader, List<Long> phoneNumbers) throws IOException {
-        if (phoneNumbers.size() != MAX_AMOUNT) {
+        int maxAmount = Integer.parseInt(Property.getValue(MAX_AMOUNT));
+        if (phoneNumbers.size() != maxAmount) {
             System.out.print("Add another phone number?(Y/N): ");
             return reader.readLine();
         } else {
