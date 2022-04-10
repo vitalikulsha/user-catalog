@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class UsersContainer {
 
-    private HashMap<Integer, User> users = new HashMap<>() {{
+    private final HashMap<Integer, User> users = new HashMap<>() {{
         put(1, new User("Ivan", "Ivanov", "ivan@gmail.com",
                 Stream.of(Role.USER, Role.ADMIN).collect(Collectors.toCollection(ArrayList::new)),
                 Stream.of(375123456789L).collect(Collectors.toCollection(ArrayList::new))));
@@ -20,7 +20,6 @@ public class UsersContainer {
                 Stream.of(Role.SUPER_ADMIN).collect(Collectors.toCollection(ArrayList::new)),
                 Stream.of(100L, 200L).collect(Collectors.toCollection(ArrayList::new))));
     }};
-
 
     public HashMap<Integer, User> getUsers() {
         return users;

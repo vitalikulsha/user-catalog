@@ -7,7 +7,7 @@ public enum Role {
     PROVIDER(2),
     SUPER_ADMIN(3);
 
-    private int level;
+    private final int level;
 
     Role(int level) {
         this.level = level;

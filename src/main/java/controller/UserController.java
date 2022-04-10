@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.util.Map;
 
 public class UserController implements Controller {
-    private Service service;
+    private final Service service;
 
     public UserController(Service service) {
         this.service = service;

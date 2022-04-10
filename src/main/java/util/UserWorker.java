@@ -17,6 +17,7 @@ public class UserWorker {
         String type = Property.getValue(TYPE);
         String filePath = String.format(FILE_PATH, dir, id, type);
         try {
+            assert dir != null;
             if (!Files.isDirectory(Path.of(dir))) {
                 Files.createDirectories(Path.of(dir));
             }

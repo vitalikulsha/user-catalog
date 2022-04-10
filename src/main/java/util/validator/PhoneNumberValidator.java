@@ -5,6 +5,7 @@ import util.Property;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class PhoneNumberValidator implements Validator<Long> {
 
@@ -20,6 +21,7 @@ public class PhoneNumberValidator implements Validator<Long> {
             System.out.print("The user can have from 1 to 3 phones. Enter #" + index +
                     " user phone number in the format " + format + ": ");
             String phoneNumber = reader.readLine();
+            assert pattern != null;
             if (phoneNumber.matches(pattern)) {
                 return Long.parseLong(phoneNumber);
             } else {
@@ -30,7 +32,7 @@ public class PhoneNumberValidator implements Validator<Long> {
 
     @Override
     public String getFlag(BufferedReader reader, List<Long> phoneNumbers) throws IOException {
-        int maxAmount = Integer.parseInt(Property.getValue(MAX_AMOUNT));
+        int maxAmount = Integer.parseInt(Objects.requireNonNull(Property.getValue(MAX_AMOUNT)));
         if (phoneNumbers.size() != maxAmount) {
             System.out.print("Add another phone number?(Y/N): ");
             return reader.readLine();

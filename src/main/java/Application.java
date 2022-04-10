@@ -16,22 +16,13 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class Application {
-    public static void main(String[] args) throws NoSuchFieldException {
+    public static void main(String[] args) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
         HashMap<Integer, User> users = new UsersContainer().getUsers();
-
         Reader userReader = new UserReader(new RoleValidator(), new PhoneNumberValidator(), new EmailValidator(), reader);
         Service userService = new UserService(users, userReader, reader);
-//        Service userService = new UserService(userReader, reader);
         Controller userController = new UserController(userService);
-
         ApplicationController applicationController = new ApplicationController(userController);
         applicationController.start();
-
-//        User user = new User("Ivan", "Ivanov", "ivan@gmail.com",
-//                Stream.of(Role.USER, Role.ADMIN).collect(Collectors.toCollection(ArrayList::new)),
-//                Stream.of(375123456789L).collect(Collectors.toCollection(ArrayList::new)));
-//        UserWorker.writeUser(user, 1);
     }
 }

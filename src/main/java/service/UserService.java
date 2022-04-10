@@ -10,12 +10,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class UserService implements Service {
     private int count;
-    private HashMap<Integer, User> users;
-    private Reader userReader;
-    private BufferedReader reader;
+    private final HashMap<Integer, User> users;
+    private final Reader userReader;
+    private final BufferedReader reader;
 
     public UserService(Reader userReader, BufferedReader reader) {
         this.users = new HashMap<>();
@@ -72,7 +73,7 @@ public class UserService implements Service {
         System.out.println("id=" + id + ": " + user);
         UserField userField = ApplicationReader.getEnum(reader, UserField.class);
         try {
-            switch (userField) {
+            switch (Objects.requireNonNull(userField)) {
                 case FIRST_NAME -> user.setFirstName(userReader.enterFirstName());
                 case LAST_NAME -> user.setLastName(userReader.enterLastName());
                 case EMAIL -> user.setEmail(userReader.enterEmail());

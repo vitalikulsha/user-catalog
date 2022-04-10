@@ -16,6 +16,7 @@ public class EmailValidator implements Validator<String> {
         while (true) {
             System.out.print("Enter the user's email in the format ****@***.***: ");
             String email = reader.readLine();
+            assert emailPattern != null;
             if (email.matches(emailPattern)) {
                 return email;
             } else {

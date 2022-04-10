@@ -4,9 +4,10 @@ import util.reader.ApplicationReader;
 import util.reader.Command;
 
 import java.io.BufferedReader;
+import java.util.Objects;
 
 public class ApplicationController {
-    private Controller controller;
+    private final Controller controller;
 
     public ApplicationController(Controller controller) {
         this.controller = controller;
@@ -15,7 +16,7 @@ public class ApplicationController {
     public void start() {
         BufferedReader reader = controller.getReader();
         Command command = ApplicationReader.getEnum(reader, Command.class);
-        switch (command) {
+        switch (Objects.requireNonNull(command)) {
             case SHOW_ALL -> controller.printAllUsers();
             case SHOW_USER -> controller.printUserById(ApplicationReader.getInteger(reader));
             case CREATE -> controller.addUser();
